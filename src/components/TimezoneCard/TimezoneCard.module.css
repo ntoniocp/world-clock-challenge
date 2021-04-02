@@ -1,0 +1,32 @@
+.card {
+  background-color: #c7def0;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 14px;
+  min-width: 130px;
+  width: 100%;
+  padding: 18px;
+  position: relative;
+  text-align: center;
+}
+
+.card_title {
+  font-weight: bold;
+  font-size: inherit;
+  margin-bottom: 2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.close-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 4px;
+  user-select: none;
+}
+
+.close-icon:hover {
+  font-weight: bold;
+}

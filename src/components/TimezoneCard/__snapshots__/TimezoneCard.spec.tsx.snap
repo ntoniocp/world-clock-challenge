@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimezoneCard Component It matches the snapshot 1`] = `
+<div
+  className="card"
+>
+  <span
+    className="close-icon"
+    onClick={[Function]}
+  >
+    X
+  </span>
+  <h2
+    className="card_title"
+  >
+    Test/Timezone
+  </h2>
+  <p
+    className="date"
+  >
+    14/12/2021
+  </p>
+  <p
+    className="time"
+  >
+    03:42PM
+  </p>
+</div>
+`;
