@@ -1,4 +1,4 @@
-import { render, waitForElementToBeRemoved } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import SearchBar from './SearchBar'
 
@@ -9,8 +9,9 @@ const props = {
 }
 
 describe('SearchBar component', () => {
-  test('It shows suggestions based on typed string (Only if matches)', () => {    
-    const testProps = {...props, maxSuggestions: 3}
+  test('It shows suggestions based on typed string (Only if matches)', () => {
+    const maxSuggestions = 3    
+    const testProps = {...props, maxSuggestions}
     const {getByTestId} = render(<SearchBar {...testProps} />)
     
     const inputField: any = getByTestId('search-bar-input')
@@ -18,9 +19,8 @@ describe('SearchBar component', () => {
 
     const optionsContainer = getByTestId('autocomplete-options-container')
     expect(optionsContainer).toBeInTheDocument()
-    expect(optionsContainer.children.length).toBe(3)
+    expect(optionsContainer.children.length).toBe(maxSuggestions)
 
-    inputField.focus()
     userEvent.type(inputField, ' AA')    
 
     expect(optionsContainer.children.length).toBe(1)
@@ -34,11 +34,11 @@ describe('SearchBar component', () => {
     userEvent.type(inputField, 'a')
     userEvent.type(inputField, '{enter}')
     expect(testProps.onSearch).toHaveBeenCalledWith('a')
-
   })
   
   test('It hides the suggested options when the user clears the input field', async () => {
-    const testProps = {...props, maxSuggestions: 1}
+    const maxSuggestions = 1
+    const testProps = {...props, maxSuggestions }
     
     const {getByTestId, queryByTestId} = render(<SearchBar {...testProps} />)
 
@@ -55,7 +55,8 @@ describe('SearchBar component', () => {
 
   test(`It doesn't show suggestions when the user haven't typed on the input`, () => {
     const {queryByTestId} = render(<SearchBar {...props} />)
-    expect(queryByTestId('autocomplete-options-container')).not.toBeInTheDocument()
+    const optionsContainer = queryByTestId('autocomplete-options-container')
+    expect(optionsContainer).not.toBeInTheDocument()
   })
 
   test('It executes search when the user clicked a suggested option', () => {
@@ -66,9 +67,9 @@ describe('SearchBar component', () => {
     userEvent.type(inputField, 'a')
 
     const optionsContainer = getByTestId('autocomplete-options-container')
-    const option = optionsContainer.children[0];
+    const firstOption = optionsContainer.children[0];
 
-    userEvent.click(option)
+    userEvent.click(firstOption)
 
     expect(testProps.onSearch).toHaveBeenCalledWith('Timezone AA')
   })
