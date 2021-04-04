@@ -8,13 +8,6 @@ import TimezoneCard from './components/TimezoneCard'
 import useTimezones from './hooks/useTimezones'
 import { Timezone } from './models/timezone'
 
-/* TODO:
-  - A;adir los tests
-  - Revisar el tipado
-  - Cambiar el UI
-  - A;adir disabled al search bar para cuando se mande la peticion
-*/
-
 function App() {
   const [timezones, selectedTimezones, selectTimezone, deselectTimezone] = useTimezones({
     initialSelected: [],
